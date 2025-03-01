@@ -1,5 +1,6 @@
 import 'package:book_finder/data/api_response.dart';
 import 'package:book_finder/data/models/book_model.dart';
+import 'package:book_finder/presentation/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/book_controller.dart';
@@ -25,8 +26,11 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final bookController = Provider.of<BookController>(context);
+    final themeController = Provider.of<ThemeController>(context);
 
     return Scaffold(
+        floatingActionButton:
+            FloatingActionButton(onPressed: themeController.toggleTheme),
         appBar: AppBar(
           title: TextField(
             controller: _controller,

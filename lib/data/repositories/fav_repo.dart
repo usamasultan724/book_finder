@@ -6,7 +6,7 @@ class FavoritesRepository {
 
   FavoritesRepository(this._dbHelper);
 
-  Future<List<BookModel>> getFavorites() async {
+  Future<List<FavoriteBook>> getFavorites() async {
     return await _dbHelper.getFavorites();
   }
 

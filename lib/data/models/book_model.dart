@@ -11,7 +11,6 @@ class BookModel {
     this.thumbnail,
   });
 
-  // Convert JSON to BookModel
   factory BookModel.fromJson(Map<String, dynamic> json) {
     final volumeInfo = json['volumeInfo'] ?? {};
     final imageLinks = volumeInfo['imageLinks'] ?? {};
@@ -26,25 +25,37 @@ class BookModel {
     );
   }
 
-  // Convert BookModel to SQLite-friendly format
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-      'authors': authors?.join(','), // Convert List<String>? to String?
+      'authors': authors?.join(','),
       'thumbnail': thumbnail,
     };
   }
 
-  // Convert SQLite row to BookModel
-  factory BookModel.fromSQLite(Map<String, dynamic> json) {
-    return BookModel(
-      id: json['id'],
-      title: json['title'],
-      authors: json['authors'] != null
-          ? (json['authors'] as String).split(',') // Convert String back to List
-          : null,
-      thumbnail: json['thumbnail'],
+}
+
+
+class FavoriteBook {
+  final String id;
+  final String? title;
+  final String? authors; 
+  final String? thumbnail;
+
+  FavoriteBook({
+    required this.id,
+    this.title,
+    this.authors,
+    this.thumbnail,
+  });
+
+  factory FavoriteBook.fromJson(Map<String, dynamic> json) {
+    return FavoriteBook(
+      id: json['id']?.toString() ?? '',
+      title: json['title']?.toString(),
+      authors: json['authors']?.toString(), 
+      thumbnail: json['thumbnail']?.toString(),
     );
   }
 }

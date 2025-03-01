@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import '../models/book_model.dart';
 
@@ -36,10 +37,12 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<List<BookModel>> getFavorites() async {
+  Future<List<FavoriteBook>> getFavorites() async {
     final db = await instance.database;
     final maps = await db.query('favorites');
-    return maps.map((json) => BookModel.fromJson(json)).toList();
+    return maps.map((json) {
+      return FavoriteBook.fromJson(json);
+    }).toList();
   }
 
   Future<void> toggleFavorite(BookModel book) async {

@@ -2,7 +2,7 @@ import 'package:book_finder/data/repositories/fav_repo.dart';
 import 'package:flutter/foundation.dart';
 import '../../data/models/book_model.dart';
 
-class FavoritesController extends ValueNotifier<List<BookModel>> {
+class FavoritesController extends ValueNotifier<List<FavoriteBook>> {
   final FavoritesRepository repository;
 
   FavoritesController(this.repository) : super([]) {
