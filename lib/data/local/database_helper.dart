@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import '../models/book_model.dart';
@@ -6,6 +7,7 @@ import '../models/book_model.dart';
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
   static Database? _database;
+  final tableName = 'favorites';
 
   DatabaseHelper._init();
 
@@ -28,18 +30,18 @@ class DatabaseHelper {
 
   Future<void> _createDB(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE favorites (
+      CREATE TABLE $tableName (
         id TEXT PRIMARY KEY,
         title TEXT,
         authors TEXT,
-        thumbnail TEXT,
+        thumbnail TEXT
       )
     ''');
   }
 
   Future<List<FavoriteBook>> getFavorites() async {
     final db = await instance.database;
-    final maps = await db.query('favorites');
+    final maps = await db.query(tableName);
     return maps.map((json) {
       return FavoriteBook.fromJson(json);
     }).toList();
@@ -48,16 +50,16 @@ class DatabaseHelper {
   Future<void> toggleFavorite(BookModel book) async {
     final db = await instance.database;
     final exists = await db.query(
-      'favorites',
+      tableName,
       where: 'id = ?',
       whereArgs: [book.id],
     );
 
     if (exists.isEmpty) {
-      await db.insert('favorites', book.toJson());
+      await db.insert(tableName, book.toJson());
     } else {
       await db.delete(
-        'favorites',
+        tableName,
         where: 'id = ?',
         whereArgs: [book.id],
       );
