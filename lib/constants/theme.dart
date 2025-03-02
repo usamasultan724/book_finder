@@ -2,14 +2,42 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final ThemeData light = ThemeData(
-    primarySwatch: Colors.blue,
+    brightness: Brightness.light,
+    primaryColor: Colors.red,
+    scaffoldBackgroundColor: Colors.white,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: const AppBarTheme(color: Colors.blue),
+
+    colorScheme: const ColorScheme.light(
+      primary: Colors.red,
+      onPrimary: Colors.white,
+      secondary: Colors.redAccent,
+      onSecondary: Colors.white,
+    ),
+
+    appBarTheme: const AppBarTheme(
+      color: Colors.red,
+      iconTheme: IconThemeData(color: Colors.white),
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+    ),
   );
 
   static final ThemeData dark = ThemeData(
-    primarySwatch: Colors.blueGrey,
+    brightness: Brightness.dark,
+    primaryColor: Colors.red.shade900,
+    scaffoldBackgroundColor: Colors.black87,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    appBarTheme: const AppBarTheme(color: Colors.blueGrey),
+
+    colorScheme: ColorScheme.dark(
+      primary: Colors.red.shade900, // ✅ Properly assigned
+      onPrimary: Colors.white,
+      secondary: Colors.redAccent,
+      onSecondary: Colors.white,
+    ),
+
+    appBarTheme: AppBarTheme(
+      color: Colors.red.shade900,
+      iconTheme: const IconThemeData(color: Colors.white),
+      titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+    ),
   );
 }
