@@ -27,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final bookController = Provider.of<BookController>(context);
-     final themeController = Provider.of<ThemeController>(context);
+    final themeController = Provider.of<ThemeController>(context);
 
     return Scaffold(
         body: Column(

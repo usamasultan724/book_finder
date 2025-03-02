@@ -67,15 +67,16 @@ class _SearchBarWithThemeToggleState extends State<SearchBarWithThemeToggle>
                     decoration: const InputDecoration(
                       hintText: 'Search books...',
                       border: InputBorder.none,
-                      contentPadding:
-                           EdgeInsets.symmetric(horizontal: 16),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
                     ),
                   ),
                 ),
                 IconButton(
                   icon: Icon(Icons.search, color: iconColor),
-                  onPressed: () =>
-                      widget.bookController.searchBooks(widget.controller.text),
+                  onPressed: () {
+                    FocusScope.of(context).unfocus();
+                    widget.bookController.searchBooks(widget.controller.text);
+                  },
                 ),
               ],
             ),
